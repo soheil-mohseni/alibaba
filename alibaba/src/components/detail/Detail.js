@@ -99,7 +99,23 @@ function Detail(props) {
                         </div>
 
                 </div>
-            <div class="border-round w-22rem h-6rem bg-blue-500 text-white font-bold flex align-items-center justify-content-center">4</div>
+            
+            
+                <div class="bborder-round w-22rem h-19rem text-white font-bold flex align-items-center justify-content-center">
+                    <div class="card">
+                            <div style={{ marginBottom: '45px',}} class="flex mr-10 flex-column card-container green-container">
+                                <div style={{color: "black"}} class="flex align-items-center w-25rem justify-content-center h-3rem font-bold border-round mr-10">
+                                {(listofcu?.borders) ? listofcu?.borders.map((bor)=>{
+                                    return(
+                                    <Button label={bor} aria-label="Submit"/>
+                                    )
+                                }) : null}
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
         </div>
         </div>
     </>
