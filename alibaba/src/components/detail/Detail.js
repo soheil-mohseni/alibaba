@@ -5,26 +5,41 @@ import Title from "../home/Title";
 import { InputText } from "primereact/inputtext";
 import Titles from "./Titles";
 import { Button } from 'primereact/button';
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 function Detail(props) {
     let { name } = useParams(); 
     const [listofcu, setListofcu] = useState([]);
+    const [aroundcu, setAroundcu] = useState([]);
+    const [aroundcus, setAroundcus] = useState(false);
+
 
     useEffect(() => {
         console.log("2222222222222222");
         countrieshandler();
-      }, []);
+      }, [aroundcus      ]);
     
       const countrieshandler = async () => {
         const rescu = await axios.get("https://restcountries.com/v3/all");
         console.log(rescu.data);
+        setAroundcu(rescu.data)
         const fil = rescu.data.filter((cu)=>{ return cu?.name?.common == name})[0]
         console.log(
             //  listofcu.filter((cu)=>{ return cu?.name?.common == name})[0].flag ,
             fil);
         setListofcu(fil);
       };
+    //  let navigate = useNavigate();
+      const forwardhandler = (event) =>{
+        //const res = event.target.value
+       // const around = aroundcu.filter((ar)=>{ return ar.fifa == res})?.[0]?.name?.common
+       // console.log("pppppppppppppppp",res);
+        //event.preventDefault();
+        setAroundcus(!aroundcus)
+      //  await submitForm(event.target);
+      //  navigate(`/detail/${around}`,{replace: true});  
+    }
+
     console.log(
       //  listofcu.filter((cu)=>{ return cu?.name?.common == name})[0].flag ,
       listofcu);
@@ -101,13 +116,19 @@ function Detail(props) {
                 </div>
             
             
-                <div class="bborder-round w-22rem h-19rem text-white font-bold flex align-items-center justify-content-center">
+                <div style={{left:'40%',position: "relative",bottom: "20%"}} class="bborder-round w-22rem h-19rem text-white font-bold flex align-items-center justify-content-center">
                     <div class="card">
-                            <div style={{ marginBottom: '45px',}} class="flex mr-10 flex-column card-container green-container">
-                                <div style={{color: "black"}} class="flex align-items-center w-25rem justify-content-center h-3rem font-bold border-round mr-10">
+                            <div style={{ marginBottom: '145px',color:"black",}} class="flex mr-10 flex-column card-container green-container">
+                                <div style={{color: "black"}} class="flex align-items-center w-45rem justify-content-center h-3rem font-bold border-round mr-10">
+                                Around Countries:  
+
                                 {(listofcu?.borders) ? listofcu?.borders.map((bor)=>{
                                     return(
-                                    <Button label={bor} aria-label="Submit"/>
+                                    <>
+                                    <Link onClick={forwardhandler} to={`/detail/${aroundcu.filter((ar)=>{ return ar.fifa == bor})?.[0]?.name?.common}`}>
+                                    <Button style={{marginLeft:"20px" }} value={bor} label={bor} aria-label="Submit"/>
+                                    </Link>
+                                    </>
                                     )
                                 }) : null}
                                 
