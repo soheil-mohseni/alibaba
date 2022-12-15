@@ -5,6 +5,7 @@ import { InputText } from "primereact/inputtext";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
+import { useNavigate } from "react-router-dom";
 
 function Title(props) {
   const [listofcu, setListofcu] = useState([]);
@@ -14,7 +15,6 @@ function Title(props) {
   //   console.log("2222222222222222");
   //   countrieshandler();
   // }, []);
-
   // const countrieshandler = async () => {
   //   const rescu = await axios.get("https://restcountries.com/v3/all");
   //   console.log(rescu.data);

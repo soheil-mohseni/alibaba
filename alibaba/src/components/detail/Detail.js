@@ -13,20 +13,21 @@ function Detail(props) {
     const [aroundcu, setAroundcu] = useState([]);
     const [aroundcus, setAroundcus] = useState(false);
 
+    const navigate = useNavigate();
+//    const { name } = useParams(); 
 
     useEffect(() => {
-        console.log("2222222222222222");
+        console.log("2222222222222222",name);
+        setAroundcus(!aroundcus)
         countrieshandler();
-      }, [aroundcus      ]);
+      }, [aroundcus]);
     
       const countrieshandler = async () => {
         const rescu = await axios.get("https://restcountries.com/v3/all");
         console.log(rescu.data);
         setAroundcu(rescu.data)
         const fil = rescu.data.filter((cu)=>{ return cu?.name?.common == name})[0]
-        console.log(
-            //  listofcu.filter((cu)=>{ return cu?.name?.common == name})[0].flag ,
-            fil);
+        console.log(fil);
         setListofcu(fil);
       };
     //  let navigate = useNavigate();
@@ -46,9 +47,15 @@ function Detail(props) {
   return (
     <>
     <Titles/>
-    <Link to={'/'}>
-    <Button label="Back" style={{position: "relative" ,left: "65px" ,top: "45px"}} className="p-button-outlined " />
-    </Link><br/><br/><br/><br/> <br/>
+    {/* <Link to={'/'}> */}
+    <Button onClick={() => {
+        console.log("hhhhhhhhhhhhhhhhhhhhhhhhh");
+        navigate(-1)
+        console.log("llllllllllllllllllllllllllllll")
+      //  setAroundcus(!aroundcus)
+    }} label="Back" style={{position: "relative" ,left: "65px" ,top: "45px"}} className="p-button-outlined " />
+    {/* </Link> */}
+    <br/><br/><br/><br/> <br/>
 
 
         <div class="card ml-7">
